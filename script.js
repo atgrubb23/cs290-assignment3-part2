@@ -21,13 +21,51 @@ function createGistsList(ul, obj) {
   for (var prop in obj) {
     for (var files in obj[prop]) {
       for (var key in obj[prop][files]) {
-        if (typeof obj[prop][files][key].language !== 'undefined') {
-          console.log(obj[prop][files][key].language);
+        var language = obj[prop][files][key].language;
+        if (typeof language !== 'undefined') {
+          createGistEntry(ul, language);
           var li = document.createElement('li');
-          li.innerText = obj[prop][files][key].language;
-          ul.appendChild(li);
+
         }
       };
     };     
   };
+}
+
+//add functionality for creating descriptions/urls
+//add functionality for making descriptions/urls links and clickable
+//start: Thu Jan 29 12:15:30 MST 2015
+//begin: Thu Jan 29 13:05:33 MST 2015
+function createGistEntry(ul, language) {
+  var li = document.createElement('li');
+  var pythonChecked = document.getElementsByName('filterPython')[0].checked;
+  var jsonChecked = document.getElementsByName('filterJSON')[0].checked;
+  var javascriptChecked = document.getElementsByName('filterJavascript')[0].checked;
+  var sqlChecked = document.getElementsByName('filterSQL')[0].checked;
+  if (!pythonChecked && !jsonChecked && !javascriptChecked && !sqlChecked) {
+    li.innerText = language;
+    ul.appendChild(li);
+    return;    
+  }
+  if (pythonChecked && language === 'Python') {
+    li.innerText = language;
+    ul.appendChild(li);
+    return;
+  }
+  if (jsonChecked && language === 'JSON') {
+    li.innerText = language;
+    ul.appendChild(li);
+    return;
+  }
+  //check 'JavaScript' string for accuracy
+  if (javascriptChecked && language === 'JavaScript') {
+    li.innerText = language;
+    ul.appendChild(li);
+    return;
+  }
+  if (sqlChecked && language === 'SQL') {
+    li.innerText = language;
+    ul.appendChild(li);
+    return;
+  }
 }
