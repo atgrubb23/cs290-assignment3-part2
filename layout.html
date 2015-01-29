@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='UTF-8'>
+    <title>Assignment 3 - Part 2</title>
+    <link rel='stylesheet' href='style.css'>
+    <script src='script.js'></script>
+  </head>
+  
+  <body>
+    <form>
+      <input type='number' min='1' max='5' name='filterNumPages' value='1'></input>
+      <input type='checkbox' name='filterPython'>Python</input>
+      <input type='checkbox' name='filterJSON'>JSON</input>
+      <input type='checkbox' name='filterJavascript'>Javascript</input>
+      <input type='checkbox' name='filterSQL'>SQL</input>
+      <input type='button' onclick='getGists()' value='Search'>
+    </form>
+    <section>
+      <ul id='gistsList'>
+      </ul>
+      <h1>Favorites</h1>
+      <ul id='favoritesList'>
+      </ul>
+    </section>
+  </body>
+</html>
