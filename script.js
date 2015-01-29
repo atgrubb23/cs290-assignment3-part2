@@ -19,12 +19,15 @@ function getGists() {
 
 function createGistsList(ul, obj) {
   for (var prop in obj) {
-      for (var files in obj[prop]) {
-        console.log(obj[prop][files]);
+    for (var files in obj[prop]) {
+      for (var key in obj[prop][files]) {
+        if (typeof obj[prop][files][key].language !== 'undefined') {
+          console.log(obj[prop][files][key].language);
+          var li = document.createElement('li');
+          li.innerText = obj[prop][files][key].language;
+          ul.appendChild(li);
+        }
       };
-      
+    };     
   };
-  //var li = document.createElement('li');
-  //li.innerText = gists;
-  //ul.appendChild(li);
 }
