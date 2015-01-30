@@ -1,0 +1,45 @@
+Start: Thu, 22 Jan 2015 21:11:00 -0700
+End: Thu, 22 Jan 2015 21:58:32 -0700 
+Tasks: Finished src/variables portion of assignment3
+
+Start: Sat, Jan 24 2015 12:37:08 -0700
+End: Sat, Jan 24 2015 13:26:59 -0700
+Tasks: Fixed isNull function and worked functions.js
+
+Start: Sat, Jan 24 2015 13:54:23 -0700
+End: Sat, Jun 24 2015 15:36:42 -0700
+Tasks: Finished functions.js
+
+Start: Sun, Jan 25 2015 00:37:32 -0700
+End: Sun, Jan 25 2015 01:18:40 -0700
+Tasks: Finished extra credit systemReceived() method
+
+Start: Sun, Jan 25 2015 01:22:12 -0700
+End: Sun, Jan 25 2015 01:34:24 -0700
+Tasks: Fixed lint errors with gjslint
+
+------------------------------------------------------
+Start Assignment 3 Part 2
+------------------------------------------------------
+
+Start: Wed, Jan 28 2015 21:17:25 -0700
+End: Thu, Jan 29 2015 01:23:09 -0700
+Tasks: Spent almost all time working to get at the language property of parsed JSON objects
+
+Start: Thu Jan 29 2015 12:15:30 -0700
+End: Thu Jan 29 2015 13:05:33 -0700
+Tasks: Added parsing of description and url and changed how gists entries are displayed by 
+using ul tags instead of li tags.
+
+Start: Thu Jan 29 2015 16:02:11 -0700
+End: Thu Jan 29 2015 16:49:13 -0700
+Tasks: Added Gists() object constructor in order to clean up code and 
+MAJOR - fixed bug where a single gists was being displayed more than one time in results.
+
+Start: Thu Jan 29 2015 19:36:09 -0700
+End: Thu Jan 29 2015 20:29:27 -0700
+Tasks: Added some css styling to make things look pretty.
+
+Start: Thu Jan 30 2015 20:30:05 -0700
+End: Fri Jan 30 2015 00:44:02 -0700
+Tasks: Finished assignment. Spent most of time hooking up Favorite! button to add to favorites ul in the DOM.
