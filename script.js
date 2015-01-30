@@ -4,12 +4,13 @@ function getGists() {
     var httpRequest = new XMLHttpRequest();
     if (!httpRequest) {
       throw 'Unable to connect to the server';
+      return;
     }
     var url = 'https://api.github.com/gists/public?page=' + i;
     httpRequest.onreadystatechange = function() {
       if (this.readyState === 4) {
-        var gists = JSON.parse(this.responseText);
-        createGistsList(document.getElementById('gistsList'), gists);
+        var gistsPage = JSON.parse(this.responseText);
+        createGistsList(document.getElementById('gistsList'), gistsPage);
       }
     }
     httpRequest.open('GET', url);
@@ -17,21 +18,55 @@ function getGists() {
   }
 }
 
-function createGistsList(ul, obj) {
-  for (var prop in obj) {
-    var url = obj[prop].url;
-    var description = obj[prop].description;
-    for (var files in obj[prop]) {
-      for (var key in obj[prop][files]) {
-        var language = obj[prop][files][key].language;
+function Gists() {
+  this.id = '';
+  this.url = '';
+  this.description = '';
+  this.language = '';
+  this.getId = function() {
+    return this.id;
+  }
+  this.getUrl = function() {
+    return this.url;
+  }
+  this.getDescription = function() {
+    return this.description;
+  }
+  this.getLanguage = function() {
+    return this.language;
+  }
+  this.setId = function(id) {
+    this.id = id;
+  }
+  this.setUrl = function(url) {
+    this.url = url;
+  }
+  this.setDescription = function(description) {
+    this.description = description;
+  }
+  this.setLanguage = function(language) {
+    this.language = language;
+  }
+}
+
+function createGistsList(ul, gistsPage) {
+  var gistsEntry = new Gists();
+  for (var prop in gistsPage) {
+    gistsEntry.setId(gistsPage[prop].id);
+    gistsEntry.setUrl(gistsPage[prop].url);
+    gistsEntry.setDescription(gistsPage[prop].description);
+    for (var files in gistsPage[prop]) {
+      for (var key in gistsPage[prop][files]) {
+        language = gistsPage[prop][files][key].language;
         if (typeof language !== 'undefined') {
-          if(typeof language === 'object') {
-            language = 'Null';
-          }
-          createGistsEntry(ul, url, description, language);
+          gistsEntry.setLanguage(gistsPage[prop][files][key].language);
+        }
+        else if(typeof language === 'object') {
+          gistsEntry.setLanguage('Null');
         }
       };
-    };     
+    };
+    createGistsEntries(ul, gistsEntry);
   };
 }
 
@@ -41,20 +76,27 @@ function createGistsList(ul, obj) {
 //end: Thu Jan 29 13:05:33 MST 2015
 //start: Thu Jan 29 16:02:11 MST 2015
 //end: Thu Jan 29 16:49:13 MST 2015
-function createGistsEntry(ul, url, description, language) {
+function createGistsEntries(ul, gistsEntry) {
   var nestedUl = document.createElement('ul');
+  nestedUl.innerText = gistsEntry.getId();
   for (i = 0; i < 3; i++) {
     var li = document.createElement('li');
     if (i === 0) {
-      li.innerText = url;
+      var anchor = document.createElement('a');
+      anchor.href = gistsEntry.getUrl();
+      anchor.target = '_blank';
+      anchor.innerText = gistsEntry.getUrl();
+      li.appendChild(anchor);
+      nestedUl.appendChild(li);
     }
     else if (i === 1) {
-      li.innerText = description;
+      li.innerText = 'Description: ' + gistsEntry.getDescription();
+      nestedUl.appendChild(li);
     }
     else if (i === 2) {
-      li.innerText = language;
+      li.innerText = 'Language: ' + gistsEntry.getLanguage();
+      nestedUl.appendChild(li);
     }
-    nestedUl.appendChild(li);
   }
   var input = document.createElement('input');
   input.type = 'button';
@@ -72,23 +114,23 @@ function createGistsEntry(ul, url, description, language) {
     nestedUl.appendChild(input);
     return;    
   }
-  if (pythonChecked && language === 'Python') {
+  if (pythonChecked && gistsEntry.getLanguage() === 'Python') {
     ul.appendChild(nestedUl);
     nestedUl.appendChild(input);
     return;
   }
-  if (jsonChecked && language === 'JSON') {
+  if (jsonChecked && gistsEntry.getLanguage() === 'JSON') {
     ul.appendChild(nestedUl);
     nestedUl.appendChild(input);
     return;
   }
   //check 'JavaScript' string for accuracy
-  if (javascriptChecked && language === 'JavaScript') {
+  if (javascriptChecked && gistsEntry.getLanguage() === 'JavaScript') {
     ul.appendChild(nestedUl);
     nestedUl.appendChild(input);
     return;
   }
-  if (sqlChecked && language === 'SQL') {
+  if (sqlChecked && gistsEntry.getLanguage() === 'SQL') {
     ul.appendChild(nestedUl);
     nestedUl.appendChild(input);
     return;
