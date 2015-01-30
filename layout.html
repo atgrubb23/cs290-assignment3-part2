@@ -8,13 +8,17 @@
   </head>
   
   <body>
+    <h2>Gists Search</h2>
     <form>
-      <input type='number' min='1' max='5' name='filterNumPages' value='1'></input>
-      <input type='checkbox' name='filterPython'>Python</input>
-      <input type='checkbox' name='filterJSON'>JSON</input>
-      <input type='checkbox' name='filterJavascript'>Javascript</input>
-      <input type='checkbox' name='filterSQL'>SQL</input>
-      <input type='button' onclick='getGists()' value='Search'>
+      <fieldset>
+        <legend>Filters</legend>
+        <input type='number' min='1' max='5' name='filterNumPages' value='1'></input>
+        <input type='checkbox' name='filterPython'>Python</input>
+        <input type='checkbox' name='filterJSON'>JSON</input>
+        <input type='checkbox' name='filterJavascript'>Javascript</input>
+        <input type='checkbox' name='filterSQL'>SQL</input>
+      </fieldset>
+        <input type='button' onclick='getGists()' value='Search'>
     </form>
     <section>
       <ul id='gistsList'>

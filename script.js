@@ -70,12 +70,6 @@ function createGistsList(ul, gistsPage) {
   };
 }
 
-//add functionality for creating descriptions/urls
-//add functionality for making descriptions/urls links and clickable
-//start: Thu Jan 29 12:15:30 MST 2015
-//end: Thu Jan 29 13:05:33 MST 2015
-//start: Thu Jan 29 16:02:11 MST 2015
-//end: Thu Jan 29 16:49:13 MST 2015
 function createGistsEntries(ul, gistsEntry) {
   var nestedUl = document.createElement('ul');
   nestedUl.innerText = gistsEntry.getId();
@@ -100,44 +94,43 @@ function createGistsEntries(ul, gistsEntry) {
   }
   var input = document.createElement('input');
   input.type = 'button';
-  input.value = 'Favorite';
-  input.onclick = function() {
-    console.log('Saving a favorite...');
-    //localStorage.setItem('aFavorite', document.getElementsByName('gistsEntry')[0].value);
-  };
+  input.value = 'Favorite!';
+  input.onclick = 'saveFavoriteGists(gistsEntry)';
+  displayGistsEntries(ul, nestedUl, input);
+}
+
+function displayGistsEntries(ul, entry, button) {
   var pythonChecked = document.getElementsByName('filterPython')[0].checked;
   var jsonChecked = document.getElementsByName('filterJSON')[0].checked;
   var javascriptChecked = document.getElementsByName('filterJavascript')[0].checked;
   var sqlChecked = document.getElementsByName('filterSQL')[0].checked;
   if (!pythonChecked && !jsonChecked && !javascriptChecked && !sqlChecked) {
-    ul.appendChild(nestedUl);
-    nestedUl.appendChild(input);
+    ul.appendChild(entry);
+    entry.appendChild(button);
     return;    
   }
   if (pythonChecked && gistsEntry.getLanguage() === 'Python') {
-    ul.appendChild(nestedUl);
-    nestedUl.appendChild(input);
+    ul.appendChild(entry);
+    entry.appendChild(button);
     return;
   }
   if (jsonChecked && gistsEntry.getLanguage() === 'JSON') {
-    ul.appendChild(nestedUl);
-    nestedUl.appendChild(input);
+    ul.appendChild(entry);
+    entry.appendChild(button);
     return;
   }
-  //check 'JavaScript' string for accuracy
   if (javascriptChecked && gistsEntry.getLanguage() === 'JavaScript') {
-    ul.appendChild(nestedUl);
-    nestedUl.appendChild(input);
+    ul.appendChild(entry);
+    entry.appendChild(button);
     return;
   }
   if (sqlChecked && gistsEntry.getLanguage() === 'SQL') {
-    ul.appendChild(nestedUl);
-    nestedUl.appendChild(input);
+    ul.appendChild(entry);
+    entry.appendChild(button);
     return;
   }
 }
 
-function saveFavoriteGists() {
-  var favorite = document.getElementsByName('gistsEntry')[0].value;
-  localStorage.setItem('favoriteGists', favorite);
+function saveFavoriteGists(gistsEntry) {
+  localStorage.setItem('id', gistsEntry.getId());
 }

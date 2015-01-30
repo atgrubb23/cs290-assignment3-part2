@@ -1,0 +1,19 @@
+ul > ul {
+  padding: 10px;
+}
+
+form input {
+  margin: 5px;
+}
+
+h2 {
+  text-align: center;
+}
+
+h1 {
+  text-align: center;
+}
+
+fieldset {
+  display: inline-block;
+}
